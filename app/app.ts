@@ -13,7 +13,7 @@ import {Random} from './components/random/random';
   { path: '/random', component: Random, as: 'random' }
 ])
 @View({
-  template: '<h1>Welcome !</h1>',
+  templateUrl: './app.html',
   directives: [RouterOutlet, RouterLink]
 })
 class App {
