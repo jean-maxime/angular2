@@ -1,1 +1,4 @@
-<h1> Search page </h1>
+<form [ng-form-model]='searchForm'>
+	<p>Search a card : <input type='text' ng-control='card'></p>
+	<button (click)='onSearch($event)'>Search</button>
+</form>
