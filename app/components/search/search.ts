@@ -14,7 +14,7 @@ import {HearthstoneApi} from 'services/hearthstoneApi'
 
 export class Search{
 	searchForm:ControlGroup;
-	hearthstoneApi:HearthstoneApi;
+	hearthstoneApi: HearthstoneApi;
 	datas: Array<Object>;
 	
 	constructor(hearthstoneApi: HearthstoneApi) {
@@ -32,11 +32,10 @@ export class Search{
 
 		e.preventDefault();
 		if(this.searchForm.valid) { // return true or false, depending on the form state
-			console.log("valid data, do something with it ->", this.searchForm.value.card);
 			//find card on submit
 			this.datas = this.hearthstoneApi.getDatabase(this.searchForm.value.card).then(response => {
 		    	// this.datas = response; 
-		    	console.log(response);
+		    	response;
 		    }, response => {
 		    	console.log("loading failed"); // This second function is called if promise is rejected
 			}
