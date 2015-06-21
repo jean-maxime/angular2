@@ -1,5 +1,12 @@
-<form [ng-form-model]='searchForm'>
+<form [ng-form-model]='searchForm' style="float:left">
 	<p>Search a card : <input type='text' ng-control='card'></p>
-	<button (click)='onSearch($event)'>Search</button>
-	<!-- <div *ng-for="#data of datas">{{data}}</div> -->
- </form>
+	<button (click)='onSearch($event)'>SEARCH SINGLE CARD</button>
+	<div *ng-for="#data of datas"><img src="{{data.img}}" /></div>
+</form>
+
+<form [ng-form-model]='searchSpec' style="float:right">
+	<h1>Search card</h1>
+
+	<button (click)='onSpec($event)'>SEARCH SPECIFICS CARD</button>
+	<div ><img src="" /></div>
+</form>

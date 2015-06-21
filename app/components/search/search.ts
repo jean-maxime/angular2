@@ -32,10 +32,9 @@ export class Search{
 
 		e.preventDefault();
 		if(this.searchForm.valid) { // return true or false, depending on the form state
-			//find card on submit
-			this.datas = this.hearthstoneApi.getDatabase(this.searchForm.value.card).then(response => {
-		    	// this.datas = response; 
-		    	response;
+			//Search card on submit
+			this.hearthstoneApi.searchCard(this.searchForm.value.card).then(response => {
+		    	this.datas = response; 
 		    }, response => {
 		    	console.log("loading failed"); // This second function is called if promise is rejected
 			}
@@ -43,7 +42,10 @@ export class Search{
 			console.error("invalid form", this.searchForm);
 		}
 
-		
+	}
 
+	onSpec(e){
+
+		return "hello"
 	}
 }
