@@ -6,7 +6,15 @@
 
 <form [ng-form-model]='searchSpec' style="float:right">
 	<h1>Search card</h1>
-
+	<p>
+		<span>Mana Cost</span>
+		<select ng-control="mana_operator">
+			<option value="<=">less than</option>
+			<option value="=">equal to</option>
+			<option value=">=">more than</option>
+		</select>
+		<input type="number" ng-control="mana">
+	</p>
 	<button (click)='onSpec($event)'>SEARCH SPECIFICS CARD</button>
 	<div ><img src="" /></div>
 </form>
