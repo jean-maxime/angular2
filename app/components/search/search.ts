@@ -46,6 +46,7 @@ export class Search{
 
 	onSpec(e){
 
-		return "hello"
+		e.preventDefault();
+		alert(this.searchSpec.value.mana);
 	}
 }
