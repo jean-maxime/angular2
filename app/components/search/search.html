@@ -8,13 +8,8 @@
 	<h1>Search card</h1>
 	<p>
 		<span>Mana Cost</span>
-		<select ng-control="mana_operator">
-			<option value="<=">less than</option>
-			<option value="=">equal to</option>
-			<option value=">=">more than</option>
-		</select>
-		<input type="number" ng-control="mana">
+		<input type="number" ng-control='mana'>
 	</p>
 	<button (click)='onSpec($event)'>SEARCH SPECIFICS CARD</button>
-	<div ><img src="" /></div>
+	<div *ng-for="#array of arrays"><img src="{{array.img}}" /></div>
 </form>
