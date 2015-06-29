@@ -1,7 +1,6 @@
 <h1> Deck page </h1>
 
-<ul>
-  <li *ng-for="#card of cards">
-    <card-item [card]="card"></card-item>
-  </li>
-</ul>
+
+<div *ng-for="#card of cards">
+	<img src="{{card.cardImg}}" />
+</div>
