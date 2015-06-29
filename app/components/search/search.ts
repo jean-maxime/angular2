@@ -1,4 +1,4 @@
-import {Component, View, bootstrap, formDirectives, ControlGroup, Control, Validators, NgFor, Pipe} from 'angular2/angular2';
+import {Component, View, bootstrap, formDirectives, ControlGroup, Control, Validators, NgFor} from 'angular2/angular2';
 import {HearthstoneApi} from 'services/hearthstoneApi'
 
 @Component({
@@ -24,7 +24,9 @@ export class Search{
 		});
 
 		this.searchSpec = new ControlGroup({
-			mana: new Control("", Validators.required), // pre-existing validator
+			mana: new Control("", Validators),
+			attack: new Control("", Validators),
+			health: new Control("", Validators), // pre-existing validator
 		});
 
 		// define hearthstoneApi on construct
@@ -53,13 +55,13 @@ export class Search{
 		e.preventDefault();
 		if(this.searchSpec.valid) { // return true or false, depending on the form state
 			//Search card on submit
-			this.hearthstoneApi.searchSpec(this.searchSpec.value.mana).then(response => {
+			this.hearthstoneApi.searchSpec(this.searchSpec.value.mana, this.searchSpec.value.attack, this.searchSpec.value.health).then(response => {
 				var arrays = new Array();
-				var i = 0;
-				for (var i = response.Basic.length - 1; i >= 0; i--) {
-					arrays.push(response.Basic[i]);
-				};
-				console.log(arrays);
+				for (var prop in response){
+					for (var i = response[prop].length - 1; i >= 0; i--) {
+						arrays.push(response[prop][i]);
+					};
+				}
 		    	this.datas = arrays;
 		    }, response => {
 		    	console.log("loading failed"); // This second function is called if promise is rejected

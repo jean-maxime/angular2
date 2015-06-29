@@ -1,7 +1,6 @@
 <form [ng-form-model]='searchForm' style="float:left">
 	<p>Search a card : <input type='text' ng-control='card'></p>
 	<button (click)='onSearch($event)'>SEARCH SINGLE CARD</button>
-	<div *ng-for="#data of datas"><img src="{{data.img}}" /></div>
 </form>
 
 <form [ng-form-model]='searchSpec' style="float:right">
@@ -9,7 +8,12 @@
 	<p>
 		<span>Mana Cost</span>
 		<input type="number" ng-control='mana'>
+		<span>Attack Cost</span>
+		<input type="number" ng-control='attack'>
+		<span>Health Cost</span>
+		<input type="number" ng-control='health'>
 	</p>
 	<button (click)='onSpec($event)'>SEARCH SPECIFICS CARD</button>
-	<div *ng-for="#array of arrays"><img src="{{array.img}}" /></div>
 </form>
+
+<div *ng-for="#data of datas"><img src="{{data.img}}" /></div>
