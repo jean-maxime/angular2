@@ -75,7 +75,7 @@ export class HearthstoneApi{
 
 	searchByID(id){
 
-		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/{"+id+"}";
+		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+id;
 
 	 	return new Promise((resolve, reject) => {
      		Zone.bindPromiseFn(fetch)(this.findCard, {

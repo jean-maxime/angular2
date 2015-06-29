@@ -1,9 +1,10 @@
 import {Component, View, bootstrap, FormBuilder, Validators, formDirectives, ControlGroup, NgFor} from 'angular2/angular2';
 import {HearthstoneApi} from 'services/hearthstoneApi'
+import {DeckServices, Card} from 'services/DeckServices';
 
 @Component({
 	selector: 'search',
-	appInjector:[HearthstoneApi]
+	appInjector:[HearthstoneApi, DeckServices]
 })
 @View({
 	directives: [formDirectives, NgFor],
@@ -14,11 +15,12 @@ export class Search{
 	searchForm: ControlGroup;
 	searchSpec: ControlGroup;
 	hearthstoneApi: HearthstoneApi;
+	deckService: DeckServices;
 	datas: Object;
-	results: Object;
-	builder:FormBuilder;
+	deck: DeckServices;
+	cards: Array<Card>; 
 	
-	constructor(hearthstoneApi: HearthstoneApi) {
+	constructor(hearthstoneApi: HearthstoneApi, deckService: DeckServices) {
 		var b = new FormBuilder()
 
 		this.searchForm = b.group({
@@ -31,18 +33,10 @@ export class Search{
       		health: [""]
 	    });
 
-		// this.searchForm = new ControlGroup({
-		// 	card: new Control("", Validators.required), // pre-existing validator
-		// });
-
-		// this.searchSpec = new ControlGroup({
-		// 	mana: new Control("", Validators),
-		// 	attack: new Control("", Validators),
-		// 	health: new Control("", Validators), // pre-existing validator
-		// });
-
 		// define hearthstoneApi on construct
 		this.hearthstoneApi = hearthstoneApi;
+		this.deck = deckService;
+		this.cards = deckService.get();
 
 	}
 
@@ -81,5 +75,11 @@ export class Search{
 		} else {
 			console.error("invalid form", this.searchSpec);
 		}
+	}
+
+	addToDeck(e, id){
+		e.preventDefault();
+		this.deck.addToDeck(id);
+		console.log(id);
 	}
 }
