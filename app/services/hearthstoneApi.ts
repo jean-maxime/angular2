@@ -21,9 +21,18 @@ export class HearthstoneApi {
     	});
 	}
 
-	searchSpec(cost){
+	searchSpec(cost = 0, attack = 0, health = 0){
+		findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?"
+		if(attack != 0){
+			findCard = findCard+"&attack="+attack;
+		}
+		if(cost != 0){
+			findCard = findCard+"&cost="+cost;
+		}
+		if(health != 0){
+			findCard = findCard+"&health="+health;
+		}
 
-		findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?cost="+cost;
 	 	return new Promise((resolve, reject) => {
      		fetch(findCard, {
 	      		headers:{
