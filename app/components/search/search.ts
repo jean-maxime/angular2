@@ -1,4 +1,4 @@
-import {Component, View, bootstrap, formDirectives, ControlGroup, Control, Validators, NgFor} from 'angular2/angular2';
+import {Component, View, bootstrap, FormBuilder, Validators, formDirectives, ControlGroup, NgFor} from 'angular2/angular2';
 import {HearthstoneApi} from 'services/hearthstoneApi'
 
 @Component({
@@ -11,23 +11,35 @@ import {HearthstoneApi} from 'services/hearthstoneApi'
 })
 
 export class Search{
-	searchForm:ControlGroup;
-	searchSpec:ControlGroup;
+	searchForm: ControlGroup;
+	searchSpec: ControlGroup;
 	hearthstoneApi: HearthstoneApi;
-	datas: Array<Object>;
+	datas: Object;
 	results: Object;
+	builder:FormBuilder;
 	
 	constructor(hearthstoneApi: HearthstoneApi) {
+		var b = new FormBuilder()
 
-		this.searchForm = new ControlGroup({
-			card: new Control("", Validators.required), // pre-existing validator
-		});
+		this.searchForm = b.group({
+	      	card: ["", Validators.required]
+	    });
 
-		this.searchSpec = new ControlGroup({
-			mana: new Control("", Validators),
-			attack: new Control("", Validators),
-			health: new Control("", Validators), // pre-existing validator
-		});
+	    this.searchSpec = b.group({
+	      	mana: [""],
+      		attack: [""],
+      		health: [""]
+	    });
+
+		// this.searchForm = new ControlGroup({
+		// 	card: new Control("", Validators.required), // pre-existing validator
+		// });
+
+		// this.searchSpec = new ControlGroup({
+		// 	mana: new Control("", Validators),
+		// 	attack: new Control("", Validators),
+		// 	health: new Control("", Validators), // pre-existing validator
+		// });
 
 		// define hearthstoneApi on construct
 		this.hearthstoneApi = hearthstoneApi;
@@ -40,7 +52,7 @@ export class Search{
 		if(this.searchForm.valid) { // return true or false, depending on the form state
 			//Search card on submit
 			this.hearthstoneApi.searchCard(this.searchForm.value.card).then(response => {
-		    	this.datas = response; 
+		    	this.datas = response;
 		    }, response => {
 		    	console.log("loading failed"); // This second function is called if promise is rejected
 			});
