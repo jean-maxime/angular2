@@ -1,3 +1,5 @@
+declare var fetch, Zone;
+
 export class HearthstoneApi {
 
 	findCard: String;
@@ -5,9 +7,9 @@ export class HearthstoneApi {
 
 	searchCard(card){
 
-		findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/"+card;
+		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/"+card;
 	 	return new Promise((resolve, reject) => {
-     		fetch(findCard, {
+     		Zone.bindPromiseFn(fetch)(this.findCard, {
 	      		headers:{
 	      			"X-Mashape-Key": "ojOTIgJwAGmshRKAl9MT4bt94nGrp1BlUj5jsnlYR5NDmN2G6q"
 	      		}
@@ -22,19 +24,19 @@ export class HearthstoneApi {
 	}
 
 	searchSpec(cost = 0, attack = 0, health = 0){
-		findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?"
+		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?"
 		if(attack != 0){
-			findCard = findCard+"&attack="+attack;
+			this.findCard = this.findCard+"&attack="+attack;
 		}
 		if(cost != 0){
-			findCard = findCard+"&cost="+cost;
+			this.findCard = this.findCard+"&cost="+cost;
 		}
 		if(health != 0){
-			findCard = findCard+"&health="+health;
+			this.findCard = this.findCard+"&health="+health;
 		}
 
 	 	return new Promise((resolve, reject) => {
-     		fetch(findCard, {
+     		Zone.bindPromiseFn(fetch)(this.findCard, {
 	      		headers:{
 	      			"X-Mashape-Key": "ojOTIgJwAGmshRKAl9MT4bt94nGrp1BlUj5jsnlYR5NDmN2G6q"
 	      		}
