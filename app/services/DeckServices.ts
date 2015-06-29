@@ -1,18 +1,14 @@
-import {HearthstoneApi} from 'services/hearthstoneApi';
-
 export class DeckServices{
 	deck: Array<Card> = [];
-	cardId: String;
 
-	constructor(){
-		this.deck.push(new Card("TU4e_002"));
-		this.deck.push(new Card("NAX7_01"));
-		this.deck.push(new Card("BRMA10_6"));
-		this.deck.push(new Card("CS2_196"));
+	setDeck(deck: Array<Object>) {
+	    this.deck = deck.map(card => {
+	      return new Card(card['cardImg']);
+	    });
 	}
 
-	addToDeck(cardId: String){
-		this.deck.push(new Card(cardId));
+	addToDeck(cardImg: String){
+		this.deck.push(new Card(cardImg));
 	}
 
 	get() {
@@ -21,9 +17,9 @@ export class DeckServices{
 }
 
 export class Card{
-	cardId: String;
+	cardImg: String;
 
-	constructor(cardId: String){
-		this.cardId = cardId;
+	constructor(cardImg: String){
+		this.cardImg = cardImg;
 	}
 }

@@ -1,10 +1,11 @@
 import {Component, View, bootstrap, FormBuilder, Validators, formDirectives, ControlGroup, NgFor} from 'angular2/angular2';
 import {HearthstoneApi} from 'services/hearthstoneApi'
 import {DeckServices, Card} from 'services/DeckServices';
+import {StorageService} from 'services/storageService';
 
 @Component({
 	selector: 'search',
-	appInjector:[HearthstoneApi, DeckServices]
+	appInjector:[HearthstoneApi, DeckServices, StorageService]
 })
 @View({
 	directives: [formDirectives, NgFor],
@@ -16,11 +17,12 @@ export class Search{
 	searchSpec: ControlGroup;
 	hearthstoneApi: HearthstoneApi;
 	deckService: DeckServices;
+	storageService: StorageService;
 	datas: Object;
 	deck: DeckServices;
 	cards: Array<Card>; 
 	
-	constructor(hearthstoneApi: HearthstoneApi, deckService: DeckServices) {
+	constructor(hearthstoneApi: HearthstoneApi, deckService: DeckServices, storageService: StorageService) {
 		var b = new FormBuilder()
 
 		this.searchForm = b.group({
@@ -33,10 +35,8 @@ export class Search{
       		health: [""]
 	    });
 
-		// define hearthstoneApi on construct
 		this.hearthstoneApi = hearthstoneApi;
-		this.deck = deckService;
-		this.cards = deckService.get();
+	    this.storageService = storageService;
 
 	}
 
@@ -77,9 +77,8 @@ export class Search{
 		}
 	}
 
-	addToDeck(e, id){
-		e.preventDefault();
-		this.deck.addToDeck(id);
-		console.log(id);
+	save(img) {
+		this.storageService.saveJson('deck', img);
+
 	}
 }

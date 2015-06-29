@@ -20,5 +20,5 @@
 </div>
 <div id="card-wrapper">
 	<div *ng-for="#data of datas"><img src="{{data.img}}" /><br>
-	<button class="submit" (click)='addToDeck($event, data.cardId)'>ADD TO DECK</button></div>
+	<button class="submit" (click)='save(data.img)'>ADD TO DECK</button></div>
 </div>
