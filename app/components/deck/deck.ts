@@ -1,4 +1,4 @@
-import {Component, View, NgFor, Parent} from 'angular2/angular2';
+import {Component, View, NgFor} from 'angular2/angular2';
 import {DeckServices, Card} from 'services/DeckServices';
 import {HearthstoneApi} from 'services/hearthstoneApi';
 import {StorageService} from 'services/storageService';
@@ -26,8 +26,15 @@ export class Deck{
 	}
 
 	load() {
-		this.deckService.setDeck(this.storageService.loadJson('deck'));
-		console.log(this.storageService.loadJson('deck'));
-		this.cards = this.deckService.get();
+		this.cards = JSON.parse(this.storageService.loadJson('deck'));
+	}
+
+	delete(img){
+	    var position = this.cards.indexOf(img);
+
+		if ( ~position ){
+			this.cards.splice(position, 1);
+			this.storageService.saveJson('deck', JSON.stringify(this.cards));
+		} 
 	}
 }

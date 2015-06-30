@@ -1,21 +1,8 @@
 export class DeckServices{
-	deck: Array<Card> = [];
+	deck: Array<Object>;
 
-	setDeck(deck: String)
-	{
-	    // this.deck = deck.map(card => {
-	    //   return new Card(card['cardImg']);
-	    // });
-	}
-
-	addToDeck(cardImg: String)
-	{
+	addToDeck(cardImg: String){
 		this.deck.push(new Card(cardImg));
-	}
-
-	get()
-	{
-		return this.deck;
 	}
 }
 
