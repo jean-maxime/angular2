@@ -39,6 +39,9 @@ export class Search{
 	    this.storageService = storageService;
 	    
 	    // Initialize deck with local storage
+	    if(this.storageService.loadJson('deck').length == 0){
+	    	this.storageService.saveJson('deck', '[]');
+	    }
 	    this.deck = JSON.parse(this.storageService.loadJson('deck'));
 
 	}
