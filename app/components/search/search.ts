@@ -19,8 +19,8 @@ export class Search{
 	deckService: DeckServices;
 	storageService: StorageService;
 	datas: Object;
-	deck: DeckServices;
-	cards: Array<Card>; 
+	deck: Array<String>;
+
 	
 	constructor(hearthstoneApi: HearthstoneApi, deckService: DeckServices, storageService: StorageService) {
 		var b = new FormBuilder()
@@ -37,10 +37,13 @@ export class Search{
 
 		this.hearthstoneApi = hearthstoneApi;
 	    this.storageService = storageService;
+	    
+	    // Initialize deck with local storage
+	    this.deck = JSON.parse(this.storageService.loadJson('deck'));
 
 	}
 
-	onSearch(e) {
+	onSearch(e){
 
 		e.preventDefault();
 		if(this.searchForm.valid) { // return true or false, depending on the form state
@@ -56,8 +59,7 @@ export class Search{
 
 	}
 
-	onSpec(e)
-	{
+	onSpec(e){
 
 		e.preventDefault();
 		if(this.searchSpec.valid) { // return true or false, depending on the form state
@@ -79,10 +81,8 @@ export class Search{
 	
 	}
 
-	save(img)
-	{
-
-		this.storageService.saveJson('deck', img);
-
+	save(img){
+		this.deck.push(img);
+		this.storageService.saveJson('deck', JSON.stringify(this.deck));
 	}
 }

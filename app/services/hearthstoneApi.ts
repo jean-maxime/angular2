@@ -1,4 +1,4 @@
-declare var fetch, Zone;
+declare var fetch;
 
 export class HearthstoneApi{
 
@@ -7,43 +7,40 @@ export class HearthstoneApi{
 
 	//Service
 	serviceCall(){
-				return new Promise((resolve, reject) => {
-		     		fetch(this.findCard, {
-			      		headers:{
-			      			"X-Mashape-Key": "ojOTIgJwAGmshRKAl9MT4bt94nGrp1BlUj5jsnlYR5NDmN2G6q"
-			      		}
-		 	 		})
-		      		.then(response => response.json())
-		      		.then(response => {
-		        		resolve(response); // resolve promise with response if it fetch succeded
-		      		}).catch(() => {
-		        		reject(); // reject promise if we catch a fetch error
-		     		});
-		    	});
-			}
+		return new Promise((resolve, reject) => {
+     		fetch(this.findCard, {
+	      		headers:{
+	      			"X-Mashape-Key": "ojOTIgJwAGmshRKAl9MT4bt94nGrp1BlUj5jsnlYR5NDmN2G6q"
+	      		}
+ 	 		})
+      		.then(response => response.json())
+      		.then(response => {
+        		resolve(response); // resolve promise with response if it fetch succeded
+      		}).catch(() => {
+        		reject(); // reject promise if we catch a fetch error
+     		});
+    	});
+	}
 
 	//Search a Card by Name
-	searchCard(card)
-	{
+	searchCard(card){
+
 		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/search/"+card;
 
 		return this.serviceCall();
 	}
 
 	//Search a card by cost, attack, health
-	searchSpec(cost = 0, attack = 0, health = 0)
-	{
+	searchSpec(cost = 0, attack = 0, health = 0){
+
 		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards?";
-		if(attack != 0)
-		{
+		if(attack != 0){
 			this.findCard = this.findCard+"&attack="+attack;
 		}
-		if(cost != 0)
-		{
+		if(cost != 0){
 			this.findCard = this.findCard+"&cost="+cost;
 		}
-		if(health != 0)
-		{
+		if(health != 0){
 			this.findCard = this.findCard+"&health="+health;
 		}
 
@@ -51,34 +48,11 @@ export class HearthstoneApi{
 	}
 
 	//Search a card by ID
-	searchByID(id)
-	{
+	searchByID(id){
+
 		this.findCard = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/"+id;
 
 		return this.serviceCall();
 	}
-
-	// RandomSet(heroicClass){
-
-
-	// 	findDeck = "https://omgvamp-hearthstone-v1.p.mashape.com/cards/classes/"+{heroicClass};
-	// 	return new Promise((resolve, reject) => {
- //     		fetch(findDeck, {
-	//       		headers:{
-	//       			"X-Mashape-Key": "ojOTIgJwAGmshRKAl9MT4bt94nGrp1BlUj5jsnlYR5NDmN2G6q"
-	//       		}
- // 	 		})
- //      		.then(response => response.json())
- //      		.then(response => {
- //        		resolve(response); // resolve promise with response if it fetch succeded
- //        		console.log('from back'+response);
- //        		console.log(response);
- //      		}).catch(() => {
- //        		reject(); // reject promise if we catch a fetch error
- //     		});
- //    	});
-
-
-	// }
 
 }
