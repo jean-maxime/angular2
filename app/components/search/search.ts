@@ -23,7 +23,7 @@ export class Search{
 
 	
 	constructor(hearthstoneApi: HearthstoneApi, deckService: DeckServices, storageService: StorageService) {
-		var b = new FormBuilder()
+		var b = new FormBuilder();
 
 		this.searchForm = b.group({
 	      	card: ["", Validators.required]
