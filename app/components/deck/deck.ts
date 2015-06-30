@@ -27,6 +27,7 @@ export class Deck{
 
 	load() {
 		this.deckService.setDeck(this.storageService.loadJson('deck'));
+		console.log(this.storageService.loadJson('deck'));
 		this.cards = this.deckService.get();
 	}
 }
