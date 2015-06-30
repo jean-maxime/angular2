@@ -56,7 +56,8 @@ export class Search{
 
 	}
 
-	onSpec(e){
+	onSpec(e)
+	{
 
 		e.preventDefault();
 		if(this.searchSpec.valid) { // return true or false, depending on the form state
@@ -75,9 +76,12 @@ export class Search{
 		} else {
 			console.error("invalid form", this.searchSpec);
 		}
+	
 	}
 
-	save(img) {
+	save(img)
+	{
+
 		this.storageService.saveJson('deck', img);
 
 	}
